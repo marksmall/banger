@@ -2,7 +2,7 @@
   "name": "banger",
   "version": "0.0.3",
   "description": "Gulp-based build system, inject tasks into lifecyce, so it can be extended by user tasks.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "clean": "gulp clean",
     "help": "gulp help",
