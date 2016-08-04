@@ -1,0 +1,60 @@
+{
+  "name": "banger",
+  "version": "0.0.1",
+  "description": "Gulp-based build system, inject tasks into lifecyce, so it can be extended by user tasks.",
+  "main": "index.js",
+  "scripts": {
+    "clean": "gulp clean",
+    "help": "gulp help",
+    "setup": "npm install --no-optional",
+    "build": "gulp",
+    "test": "gulp test",
+    "start": "gulp watch"
+  },
+  "engines": {
+    "node": ">=4.4.2",
+    "npm": ">=3.8.6"
+  },
+  "keywords": [
+    "Gulp",
+    "Build",
+    "Lifecyce"
+  ],
+  "author": {
+    "name": "Mark Small",
+    "email": "marksmall@gmx.com"
+  },
+  "license": "MIT",
+  "bugs": "TODO",
+  "contributors": [{
+    "name": "Mark Small",
+    "email": "marksmall@gmx.com"
+  }],
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "del": "^2.2.1",
+    "eslint": "^3.2.2",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-promise": "^2.0.0",
+    "eslint-plugin-standard": "^2.0.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-changed": "^1.3.1",
+    "gulp-debug": "^2.1.2",
+    "gulp-help": "^1.6.1",
+    "gulp-jshint": "^2.0.1",
+    "gulp-nice-package": "^1.1.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-size": "^2.1.0",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0",
+    "karma": "^1.1.2",
+    "path": "^0.12.7",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.2.2"
+  }
+}
