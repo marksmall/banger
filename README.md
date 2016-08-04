@@ -1,6 +1,8 @@
 # Gulp-Based Build System
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+[![GitHub issues](https://img.shields.io/github/issues/marksmall/banger.svg)](https://github.com/marksmall/banger/issues)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/marksmall/banger/master/LICENSE.MD)
 
 This project uses [Gulp](http://gulpjs.com/) to build NodeJS based apps.
 
@@ -33,3 +35,24 @@ There are in fact multiple life-cycles, **Clean** and **Default**.
 | test                    | run tests using a suitable unit testing framework. These tests should not require the code be packaged or deployed.                                                           |
 | package                 | take the compiled code and package it in its distributable format, such as a JAR.                                                                                             |
 | deploy                  | done in an integration or release environment, copies the final package to the remote repository for sharing with other developers and projects.                              |
+
+## Release Process
+
+* commit all changes to include in the release
+* edit the version in package.json (respect **semver**)
+* update CHANGELOG.MD
+* commit
+* git tag &lt;version&gt;
+* git push --tags
+* draft the release on GitHub (add description, etc)
+* npm publish
+
+## Authors
+
+### Mark Small
+
+* [@GitHub](https://github.com/marksmall)
+
+## License
+
+This project and all associated source code is licensed under the terms of the [MIT License](https://en.wikipedia.org/wiki/MIT_License).
