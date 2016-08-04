@@ -11,7 +11,7 @@ import runSequence from 'run-sequence'
 help(gulp)
 
 // Load all tasks in gulp/tasks, including subfolders
-requireDir('./gulp/', {
+requireDir('./gulp/tasks', {
   recurse: true
 })
 

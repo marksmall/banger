@@ -16,7 +16,7 @@
 
 import requireDir from 'require-dir'
 
-import utils from './gulp/utils'
+import utils from './utils'
 
 /**
  * This class takes care of loading gulp tasks.
