@@ -8,6 +8,7 @@ let KarmaServer = karma.Server
 
 /**
  * Whether we should make the house explode whenever errors occur (e.g., stop gulp serve)
+ *
  * @type {boolean}
  */
 let exitOnError = false
@@ -15,6 +16,7 @@ let exitOnError = false
 /**
  * Display errors nicely and avoid having errors breaking tasks/watch
  * Reference: https://github.com/mikaelbr/gulp-notify/issues/81
+ *
  * @param error the error to report
  */
 let reportError = (error) => {
@@ -61,7 +63,9 @@ let reportError = (error) => {
 
 /**
  * Exclude files from globs
+ *
  * @param providedPath the path that should be excluded
+ *
  * @returns {string} the exclusion string
  */
 let exclude = providedPath => '!' + providedPath
@@ -69,7 +73,9 @@ let exclude = providedPath => '!' + providedPath
 /**
  * Filter out empty directories
  * reference: http://stackoverflow.com/questions/23719731/gulp-copying-empty-directories
+ *
  * @param es the list to filter
+ *
  * @returns {*} the filtered list
  */
 let filterEmptyDirectories = es => {
@@ -85,8 +91,10 @@ let filterEmptyDirectories = es => {
 /**
  * Validate that the passed argument is not null or undefined.
  * If validation fails, an error is thrown.
+ *
  * @param arg the argument to check
  * @param errorMessage the error message to use if validation fails
+ *
  * @throws Error if validation fails
  */
 let validateArgument = (arg, errorMessage) => {
@@ -99,7 +107,9 @@ let validateArgument = (arg, errorMessage) => {
 
 /**
  * Validate that the passed argument is a valid gulp object
+ *
  * @param obj the object to validate
+ *
  * @throws Error if validation fails
  */
 let validateGulpObject = obj => {
@@ -110,7 +120,9 @@ let validateGulpObject = obj => {
 /**
  * Validate that the passed argument is a valid gulp object and is configured as expected.
  * It should have the help task defined
+ *
  * @param obj the object to validate
+ *
  * @throws Error if validation fails
  */
 let validateGulpObjectIsConfigured = obj => {
@@ -125,8 +137,10 @@ let validateGulpObjectIsConfigured = obj => {
  * Configure the passed in gulp object so that it is customized as we need:
  * - gulp help loaded and enabled
  * - gulp plumbedSrc function added (integrates plumber)
+ *
  * @param obj the object to validate
  * @param options the build options
+ *
  * @throws Error if validation fails
  */
 let configureGulpObject = (obj, options) => {
@@ -151,8 +165,10 @@ let configureGulpObject = (obj, options) => {
 
 /**
  * Overwrites obj1's values with obj2's and adds obj2's if non existent in obj1
+ *
  * @param obj1
  * @param obj2
+ *
  * @returns obj3 a new object based on obj1 and obj2
  */
 let mergeOptions = (obj1 = {}, obj2 = {}) => {
