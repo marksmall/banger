@@ -15,6 +15,12 @@ tasks to build any application.
 
 ## Life-cycle
 
+Each life-cycle is made up of phases, each depending on the previous in the chain to
+have executed. You attach tasks to a phase for it to be run. Each task associated with
+a phase is run in parallel.
+
+**IMPORTANT:** A task must have no dependency other than the phase.
+
 There are in fact multiple life-cycles, **Clean** and **Default**.
 
 | Name       | Description                                                   |
@@ -33,8 +39,41 @@ There are in fact multiple life-cycles, **Clean** and **Default**.
 | compile                 | compile the source code of the project.                                                                                                                                       |
 | test-compile            | compile the test source code into the test destination directory                                                                                                              |
 | test                    | run tests using a suitable unit testing framework. These tests should not require the code be packaged or deployed.                                                           |
-| package                 | take the compiled code and package it in its distributable format, such as a JAR.                                                                                             |
-| deploy                  | done in an integration or release environment, copies the final package to the remote repository for sharing with other developers and projects.                              |
+| dist                    | take the compiled code and package it in its distributable format, such as a JAR.                                                                                             |
+
+### Validate
+
+The validate phase is where we check files:
+
+* well-formed package.json
+* lint code (JavaScript,TypeScript,SASS)
+
+### Initialize
+
+Create directories and any other necessary project structure before project can be built.
+
+### Resources
+
+Generate resources used by the project:
+
+* image sprites
+* source-maps
+
+### Compile
+
+Compile the code (if necessary), for instance, if you are using TypeScript.
+
+### Compile Tests
+
+Compile the code (if necessary), for instance, if you are using TypeScript.
+
+### Test
+
+Run Unit Tests
+
+### Create Distribution
+
+Generate the distribution.
 
 ## Release Process
 
