@@ -5,7 +5,7 @@ let cleanLifecycle = ['pre-clean', 'clean', 'post-clean']
 
 let buildLifecycle = ['validate', 'initialize', 'resources', 'compile', 'test-compile', 'test', 'package', 'deploy']
 
-const extensions = {
+let extensions = {
   javascript: '.js',
   typescript: '.ts',
   css: '.css',
@@ -60,5 +60,8 @@ let files = {
 export default {
   buildLifecycle,
   cleanLifecycle,
-  files
+  extensions,
+  files,
+  folders,
+  globs
 }
