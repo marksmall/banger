@@ -3,6 +3,7 @@ import notify from 'gulp-notify'
 import gutil from 'gulp-util'
 import plumber from 'gulp-plumber'
 import karma from 'karma'
+import requireDir from 'require-dir'
 
 let KarmaServer = karma.Server
 
@@ -220,6 +221,28 @@ let getKarmaServer = (config, callback) => {
   }, callback).start()
 }
 
+let registerTask = (taskDir, gulp) => {
+  // Load all tasks in gulp/tasks
+  let loadedModules = requireDir(taskDir, {
+    recurse: false
+  })
+
+  // request each module to register its tasks
+  for (let key in loadedModules) {
+    if (loadedModules.hasOwnProperty(key)) {
+      let loadedModule = loadedModules[ key ]
+    //   console.log(`Module: ${JSON.stringify(loadedModule)}`)
+
+      if (loadedModule.registerTask) {
+        console.log(`Registering module: ${key}`)
+        loadedModule.registerTask(gulp, loadedModule.phase)
+      } else {
+        throw new TypeError(`The following module does not expose the expected interface: ${key}`)
+      }
+    }
+  }
+}
+
 export default {
   exclude,
   reportError,
@@ -231,5 +254,6 @@ export default {
   getJavaScriptFolder,
   getTypeScriptFolder,
   getCssFolder,
-  getKarmaServer
+  getKarmaServer,
+  registerTask
 }
