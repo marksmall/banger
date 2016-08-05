@@ -2,7 +2,7 @@
 
 import gulp from 'gulp'
 import help from 'gulp-help'
-import jshint from 'gulp-jshint'
+import eslint from 'gulp-eslint'
 // import debug from 'gulp-debug'
 
 import config from '../config'
@@ -20,11 +20,15 @@ gulp.task('check-js-quality', 'Check JavaScript code quality using JSHint', () =
   // Display the files in the stream
   // .pipe(debug({title: 'Stream contents:', minimal: true}))
 
-  // Run JSHint
-  .pipe(jshint())
+  // Run ESLint
+  .pipe(eslint())
 
-  // Generate a stylish report
-  .pipe(jshint.reporter('jshint-stylish'))
+  // eslint.format() outputs the lint results to the console.
+  .pipe(eslint.format())
+
+  // To have the process exit with an error code (1) on
+  // lint error, return the stream and pipe to failAfterError last.
+  .pipe(eslint.failAfterError())
 
   // Fail the build only if BrowserSync is not active
   // Actually, failing the build is counter-productive thus evil
