@@ -18,18 +18,28 @@
   "keywords": [
     "Gulp",
     "Build",
-    "Lifecyce"
+    "Lifecyce",
+    "es6",
+    "es2015",
+    "sass"
   ],
   "author": {
     "name": "Mark Small",
     "email": "marksmall@gmx.com"
   },
+  "homepage": "https://github.com/marksmall/banger",
   "license": "MIT",
-  "bugs": "TODO",
-  "contributors": [{
-    "name": "Mark Small",
-    "email": "marksmall@gmx.com"
-  }],
+  "bugs": "https://github.com/marksmall/banger/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marksmall/banger.git"
+  },
+  "contributors": [
+    {
+      "name": "Mark Small",
+      "email": "marksmall@gmx.com"
+    }
+  ],
   "files": [
     "dist"
   ],
