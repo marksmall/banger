@@ -1,5 +1,9 @@
 # CHANGLOG
 
+* 0.0.5
+  * Add basic life-cycle support.
+  * Fix imports.
+  * Add initialize task.
 * 0.0.4
   * Fix location of main file, now in dist directory.
 * 0.0.3
