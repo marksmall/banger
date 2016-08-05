@@ -135,6 +135,16 @@ let validateGulpObjectIsConfigured = obj => {
 }
 
 /**
+ * Register task with corresponding life-cycle phase
+ *
+ * @param phase the phase task should be registered with
+ * @param task the task to register
+ */
+let registerPhase = (phase, task) => {
+  gutil.log(gutil.colors.green(`Registering sub-task: ${task} with phase: ${phase}`))
+}
+
+/**
  * Configure the passed in gulp object so that it is customized as we need:
  * - gulp help loaded and enabled
  * - gulp plumbedSrc function added (integrates plumber)
@@ -255,5 +265,6 @@ export default {
   getTypeScriptFolder,
   getCssFolder,
   getKarmaServer,
+  registerPhase,
   registerTask
 }

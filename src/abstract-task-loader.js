@@ -21,9 +21,13 @@ export default class AbstractTaskLoader {
    * Register a task in the provided gulp object.
    *
    * @param gulp the gulp object where the task should be registered
+   * @param phase the life-cycle phase to bind task to
    */
   registerTask (gulp) {
     'use strict'
+
+    // Register task with the appropriate life-cycle phase
+    // utils.registerPhase(phase)
 
     utils.validateGulpObjectIsConfigured(gulp)
   }
