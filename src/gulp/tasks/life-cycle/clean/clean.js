@@ -3,12 +3,20 @@
 
 import gutil from 'gulp-util'
 
-import AbstractTaskLoader from '../../../abstract-task-loader'
+import AbstractTaskLoader from '../../../../abstract-task-loader'
 // import config from '../../config'
 // import utils from '../../utils'
 
 let runSequence = require('run-sequence')
 
+/**
+ * The clean phase is where we delete all generated files, it has sub-phases
+ * that are run so things are cleaned in an orderly fashion.
+ *
+ * @class CleanTaskLoader
+ *
+ * @extends {AbstractTaskLoader}
+ */
 class CleanTaskLoader extends AbstractTaskLoader {
   registerTask (gulp, lifecycle) {
     super.registerTask(gulp, lifecycle)

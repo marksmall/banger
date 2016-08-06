@@ -3,7 +3,7 @@
 
 import gutil from 'gulp-util'
 
-import AbstractTaskLoader from '../../../abstract-task-loader'
+import AbstractTaskLoader from '../../../../abstract-task-loader'
 // import config from '../../config'
 // import utils from '../../utils'
 

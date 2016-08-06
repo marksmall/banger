@@ -34,6 +34,8 @@ class TasksLoader {
     gulp = utils.configureGulpObject(gulp, options) // we need to customize the gulp object a bit
 
     utils.registerTask('./gulp/tasks/life-cycle', gulp)
+    utils.registerTask('./gulp/tasks/life-cycle/clean', gulp)
+    utils.registerTask('./gulp/tasks/life-cycle/default', gulp)
     utils.registerTask('./gulp/tasks', gulp)
   }
 }

@@ -3,7 +3,7 @@
 
 import gutil from 'gulp-util'
 
-import AbstractTaskLoader from '../../../abstract-task-loader'
+import AbstractTaskLoader from '../../../../abstract-task-loader'
 // import config from '../../config'
 // import utils from '../../utils'
 
@@ -35,7 +35,7 @@ class ValidateTaskLoader extends AbstractTaskLoader {
 
       // Merge with user defined tasks
       tasks = [...tasks, ...userTasks]
-      gutil.log(gutil.colors.green(`Validate Phase - unning sub-tasks ${tasks}`))
+      gutil.log(gutil.colors.green(`Validate Phase - Running sub-tasks ${tasks}`))
       return runSequence(tasks)
     })
   }

@@ -3,12 +3,20 @@
 
 import gutil from 'gulp-util'
 
-import AbstractTaskLoader from '../../../abstract-task-loader'
+import AbstractTaskLoader from '../../../../abstract-task-loader'
 // import config from '../../config'
 // import utils from '../../utils'
 
 let runSequence = require('run-sequence')
 
+/**
+ * The pre-clean phase is where we run tasks that must complete before
+ * generated files can be deleted.
+ *
+ * @class PreCleanTaskLoader
+ *
+ * @extends {AbstractTaskLoader}
+ */
 class PreCleanTaskLoader extends AbstractTaskLoader {
   registerTask (gulp) {
     super.registerTask(gulp)
