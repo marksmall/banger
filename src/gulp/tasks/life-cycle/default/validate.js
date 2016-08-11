@@ -4,8 +4,8 @@
 import gutil from 'gulp-util'
 
 import AbstractTaskLoader from '../../../../abstract-task-loader'
-// import config from '../../config'
-// import utils from '../../utils'
+// import config from '../../../../config'
+import utils from '../../../../utils'
 
 let runSequence = require('run-sequence')
 
@@ -26,16 +26,20 @@ class ValidateTaskLoader extends AbstractTaskLoader {
 
     runSequence = runSequence.use(gulp)
 
-    gulp.task('validate', 'Validate the package.json file', () => {
-      gutil.log(gutil.colors.green('Validate task being run'))
+    gulp.task('validate', 'Validate project files, code etc', () => {
+      gutil.log(gutil.colors.green('Validate project files, code etc'))
 
       // Get tasks associated with the initialize life-cycle phase.
-      let tasks = ['validate-package-json', 'ts-lint']
-      let userTasks = []
+    //   let tasks = ['validate-package-json', 'ts-lint', 'js-lint', 'sass-lint']
+      let tasks = null
+      utils.defaultLifecycle.forEach(function (element) {
+        if (element.id === 'validate') {
+          tasks = element.tasks
+        }
+      }, this)
 
       // Merge with user defined tasks
-      tasks = [...tasks, ...userTasks]
-      gutil.log(gutil.colors.green(`Validate Phase - Running sub-tasks ${tasks}`))
+      gutil.log(gutil.colors.green('Validate Phase - sub-tasks: ') + gutil.colors.blue(tasks))
       return runSequence(tasks)
     })
   }

@@ -3,9 +3,9 @@
 
 import gutil from 'gulp-util'
 
-import AbstractTaskLoader from '../../../abstract-task-loader'
-// import config from '../../config'
-// import utils from '../../utils'
+import AbstractTaskLoader from '../../../../abstract-task-loader'
+// import config from '../../../../config'
+import utils from '../../../../utils'
 
 let runSequence = require('run-sequence')
 
@@ -22,15 +22,19 @@ class DistributeTaskLoader extends AbstractTaskLoader {
     runSequence = runSequence.use(gulp)
 
     gulp.task('dist', 'Generate distributable package', ['test'], () => {
-      gutil.log(gutil.colors.green('Distribute task being run'))
+      gutil.log(gutil.colors.green('Generate distributable package'))
 
       // Get tasks associated with the Distribute life-cycle phase.
-      let tasks = ['source-maps', 'log']
-      let userTasks = []
+    //   let tasks = ['styles-vendor', 'styles-app', 'js-app']
+      let tasks = null
+      utils.defaultLifecycle.forEach(function (element) {
+        if (element.id === 'dist') {
+          tasks = element.tasks
+        }
+      }, this)
 
       // Merge with user defined tasks
-      tasks = [...tasks, ...userTasks]
-      gutil.log(gutil.colors.green(`Distribute Phase - Running sub-tasks ${tasks}`))
+      gutil.log(gutil.colors.green('Distribute Phase - sub-tasks: ') + gutil.colors.blue(tasks))
       return runSequence(tasks)
     })
   }

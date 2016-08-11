@@ -5,7 +5,7 @@ import gutil from 'gulp-util'
 
 import AbstractTaskLoader from '../../../../abstract-task-loader'
 // import config from '../../config'
-// import utils from '../../utils'
+import utils from '../../../../utils'
 
 let runSequence = require('run-sequence')
 
@@ -22,15 +22,18 @@ class InitializeTaskLoader extends AbstractTaskLoader {
     runSequence = runSequence.use(gulp)
 
     gulp.task('initialize', 'Initialize the build', ['validate'], () => {
-      gutil.log(gutil.colors.green('Initialize task being run'))
+      gutil.log(gutil.colors.green('Initialize the build'))
 
       // Get tasks associated with the initialize life-cycle phase.
-      let tasks = ['log']
-      let userTasks = []
+      let tasks = null
+      utils.defaultLifecycle.forEach(function (element) {
+        if (element.id === 'initialize') {
+          tasks = element.tasks
+        }
+      }, this)
 
       // Merge with user defined tasks
-      tasks = [...tasks, ...userTasks]
-      gutil.log(gutil.colors.green(`Initialize Phase - Running sub-tasks ${tasks}`))
+      gutil.log(gutil.colors.green('Initialize Phase - sub-tasks: ') + gutil.colors.blue(tasks))
       return runSequence(tasks)
     })
   }

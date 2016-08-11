@@ -4,8 +4,8 @@
 import gutil from 'gulp-util'
 
 import AbstractTaskLoader from '../../../../abstract-task-loader'
-// import config from '../../config'
-// import utils from '../../utils'
+// import config from '../../../../config'
+import utils from '../../../../utils'
 
 let runSequence = require('run-sequence')
 
@@ -25,15 +25,19 @@ class TestTaskLoader extends AbstractTaskLoader {
     runSequence = runSequence.use(gulp)
 
     gulp.task('test', 'Generate Test used by the project', ['compile'], () => {
-      gutil.log(gutil.colors.green('Test task being run'))
+      gutil.log(gutil.colors.green('Generate Test used by the project'))
 
       // Get tasks associated with the Test life-cycle phase.
-      let tasks = ['unit-test', 'log']
-      let userTasks = []
+    //   let tasks = ['unit-test']
+      let tasks = null
+      utils.defaultLifecycle.forEach(function (element) {
+        if (element.id === 'test') {
+          tasks = element.tasks
+        }
+      }, this)
 
       // Merge with user defined tasks
-      tasks = [...tasks, ...userTasks]
-      gutil.log(gutil.colors.green(`Test Phase - Running sub-tasks ${tasks}`))
+      gutil.log(gutil.colors.green('Test Phase - sub-tasks: ') + gutil.colors.blue(tasks))
       return runSequence(tasks)
     })
   }
