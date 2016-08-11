@@ -4,8 +4,8 @@
 import gutil from 'gulp-util'
 
 import AbstractTaskLoader from '../../../../abstract-task-loader'
-// import config from '../../config'
-// import utils from '../../utils'
+// import config from '../../../../config'
+import utils from '../../../../utils'
 
 let runSequence = require('run-sequence')
 
@@ -23,16 +23,19 @@ class CleanerTaskLoader extends AbstractTaskLoader {
 
     runSequence = runSequence.use(gulp)
 
-    gulp.task('cleaner', 'Delete all generated files', () => {
+    gulp.task('cleaner', false, () => {
       gutil.log(gutil.colors.green('Cleaner task being run'))
 
       // Get tasks associated with the initialize life-cycle phase.
-      let tasks = ['delete']
-      let userTasks = []
+    //   let tasks = ['delete']
+      let tasks = null
+      utils.cleanLifecycle.forEach(function (element) {
+        if (element.id === 'cleaner') {
+          tasks = element.tasks
+        }
+      }, this)
 
-      // Merge with user defined tasks
-      tasks = [...tasks, ...userTasks]
-      gutil.log(gutil.colors.green(`Cleaner Phase - Running sub-tasks ${tasks}`))
+      gutil.log(gutil.colors.green('Cleaner Phase - sub-tasks: ') + gutil.colors.blue(tasks))
       return runSequence(tasks)
     })
   }

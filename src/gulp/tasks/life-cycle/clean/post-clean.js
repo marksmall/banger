@@ -4,8 +4,8 @@
 import gutil from 'gulp-util'
 
 import AbstractTaskLoader from '../../../../abstract-task-loader'
-// import config from '../../config'
-// import utils from '../../utils'
+// import config from '../../../../config'
+import utils from '../../../../utils'
 
 let runSequence = require('run-sequence')
 
@@ -22,15 +22,19 @@ class PostCleanTaskLoader extends AbstractTaskLoader {
     super.registerTask(gulp)
     runSequence = runSequence.use(gulp)
 
-    gulp.task('pre-clean', false, () => {
+    gulp.task('post-clean', false, () => {
       gutil.log(gutil.colors.green('Post-Clean task being run'))
 
       // Get tasks associated with the initialize life-cycle phase.
-      let tasks = ['log']
-      let userTasks = []
-      // Merge with user defined tasks
-      tasks = [...tasks, ...userTasks]
-      gutil.log(gutil.colors.green(`Running sub-tasks ${tasks}`))
+    //   let tasks = ['log']
+      let tasks = null
+      utils.cleanLifecycle.forEach(function (element) {
+        if (element.id === 'post-clean') {
+          tasks = element.tasks
+        }
+      }, this)
+
+      gutil.log(gutil.colors.green('Post-Clean Phase - sub-tasks: ') + gutil.colors.blue(tasks))
       return runSequence(tasks)
     })
   }
