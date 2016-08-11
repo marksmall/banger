@@ -1,5 +1,8 @@
 # CHANGLOG
 
+* 0.0.6
+  * Added task self-based life-cycle support.
+  * Added ability for users to add their own tasks to life-cycle phases.
 * 0.0.5
   * Add basic life-cycle support.
   * Fix imports.
