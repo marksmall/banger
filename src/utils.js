@@ -5,6 +5,37 @@ import plumber from 'gulp-plumber'
 import karma from 'karma'
 import requireDir from 'require-dir'
 
+let cleanLifecycle = [{
+  id: 'pre-clean',
+  tasks: ['log']
+}, {
+  id: 'cleaner',
+  tasks: []
+}, {
+  id: 'post-clean',
+  tasks: ['log']
+}]
+
+let defaultLifecycle = [{
+  id: 'validate',
+  tasks: []
+}, {
+  id: 'initialize',
+  tasks: []
+}, {
+  id: 'resources',
+  tasks: []
+}, {
+  id: 'compile',
+  tasks: []
+}, {
+  id: 'test',
+  tasks: []
+}, {
+  id: 'dist',
+  tasks: []
+}]
+
 let KarmaServer = karma.Server
 
 /**
@@ -135,16 +166,6 @@ let validateGulpObjectIsConfigured = obj => {
 }
 
 /**
- * Register task with corresponding life-cycle phase
- *
- * @param phase the phase task should be registered with
- * @param task the task to register
- */
-let registerPhase = (phase, task) => {
-  gutil.log(gutil.colors.green(`Registering sub-task: ${task} with phase: ${phase}`))
-}
-
-/**
  * Configure the passed in gulp object so that it is customized as we need:
  * - gulp help loaded and enabled
  * - gulp plumbedSrc function added (integrates plumber)
@@ -202,7 +223,7 @@ let mergeOptions = (obj1 = {}, obj2 = {}) => {
 
 let getJavaScriptFolder = (gulp, config) => {
   if (gulp.options.folders) {
-    return [ gulp.options.folders.app + config.globs.scripts.javascript ]
+    return [ gulp.options.folders.src + config.globs.scripts.javascript ]
   } else {
     return config.javascript.src
   }
@@ -210,7 +231,7 @@ let getJavaScriptFolder = (gulp, config) => {
 
 let getTypeScriptFolder = (gulp, config) => {
   if (gulp.options.folders) {
-    return [ gulp.options.folders.app + config.globs.scripts.javascript ]
+    return [ gulp.options.folders.src + config.globs.scripts.javascript ]
   } else {
     return config.javascript.src
   }
@@ -218,7 +239,7 @@ let getTypeScriptFolder = (gulp, config) => {
 
 let getCssFolder = (gulp, config) => {
   if (gulp.options.folders) {
-    return [ gulp.options.folders.app + config.globs.styles.css, gulp.options.folders.app + config.globs.styles.sass ]
+    return [ gulp.options.folders.src + config.globs.styles.css, gulp.options.folders.src + config.globs.styles.sass ]
   } else {
     return config.styles.src
   }
@@ -231,7 +252,28 @@ let getKarmaServer = (config, callback) => {
   }, callback).start()
 }
 
-let registerTask = (taskDir, gulp) => {
+/**
+ * Register task with corresponding life-cycle phase
+ *
+ * @param phase the phase task should be registered with
+ * @param task the task to register
+ */
+let registerPhase = (loadedModule) => {
+  gutil.log(gutil.colors.green(`Registering sub-task: ${loadedModule.name} with phase: ${loadedModule.phase}`))
+  defaultLifecycle.forEach(function (element) {
+    if (element.id === loadedModule.phase) {
+      element.tasks.push(loadedModule.name)
+    }
+  }, this)
+
+  cleanLifecycle.forEach(function (element) {
+    if (element.id === loadedModule.phase) {
+      element.tasks.push(loadedModule.name)
+    }
+  }, this)
+}
+
+let registerTask = (taskDir, gulp, options) => {
   // Load all tasks in gulp/tasks
   let loadedModules = requireDir(taskDir, {
     recurse: false
@@ -244,8 +286,12 @@ let registerTask = (taskDir, gulp) => {
     //   console.log(`Module: ${JSON.stringify(loadedModule)}`)
 
       if (loadedModule.registerTask) {
-        console.log(`Registering module: ${key}`)
-        loadedModule.registerTask(gulp, loadedModule.phase)
+        console.log(`Registering module ${key}`)
+        loadedModule.registerTask(gulp)
+
+        if (loadedModule.phase) {
+          registerPhase(loadedModule)
+        }
       } else {
         throw new TypeError(`The following module does not expose the expected interface: ${key}`)
       }
@@ -254,6 +300,8 @@ let registerTask = (taskDir, gulp) => {
 }
 
 export default {
+  cleanLifecycle,
+  defaultLifecycle,
   exclude,
   reportError,
   filterEmptyDirectories,
