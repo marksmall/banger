@@ -75,6 +75,52 @@ Run Unit Tests
 
 Generate the distribution.
 
+
+### Old Task Order
+
+default:
+  validate-package-json
+  parallel:
+    clean
+    ts-lint
+    check-js-style
+    check-js-quality
+  parallel:
+    scripts-TypeScript
+    scripts-JavaScript
+  copy:
+  parallel:
+    styles-vendor-dist
+    styles-dist
+    scripts-JavaScript-dist
+    html
+    images
+
+### New task Order
+
+clean
+
+default:
+  validate:
+    package-json
+    ts-lint
+    js-lint
+    sass-lint
+  initialize:
+    log
+  resources:
+    html
+    images
+  compile:
+    ts-compile
+    js-compile
+  test:
+    unit-test
+  dist:
+    styles-vendor
+    styles-app
+    js
+
 ## Release Process
 
 * commit all changes to include in the release
