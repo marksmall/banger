@@ -1,9 +1,7 @@
 
 import path from 'path'
 
-let cleanLifecycle = ['pre-clean', 'clean', 'post-clean']
-
-let buildLifecycle = ['validate', 'initialize', 'resources', 'compile', 'test-compile', 'test', 'package', 'deploy']
+import utils from './utils'
 
 let extensions = {
   javascript: '.js',
@@ -57,11 +55,74 @@ let files = {
   systemjsConfigDefault: 'jspm.conf.js'
 }
 
+let buildTime = new Date().toISOString().replace(/-|:/g, '')
+
+let finalJsBundleName = 'bundle.min.' + buildTime + extensions.javascript
+
+let javascript = {
+  src: [
+    path.join(folders.src, globs.scripts.javascript)
+  ],
+  srcDist: path.join(folders.temp, '/core/boot.js'),
+  dest: folders.temp,
+  destDist: path.join(folders.dist, folders.scripts, finalJsBundleName),
+  finalJsBundlePath: path.join(folders.scripts, finalJsBundleName)
+}
+
+let typescript = {
+  srcAppOnly: [
+    path.join(folders.src, globs.scripts.typescript)
+  ],
+  dest: folders.temp // JavaScript code is emitted in the temp folder
+}
+
+let finalCSSBundleName = 'bundle.min.' + buildTime + '.css'
+let finalCSSVendorBundleName = 'vendor.min.' + buildTime + '.css'
+
+let styles = {
+  src: [
+    path.join(folders.src, globs.styles.css),
+    path.join(folders.src, globs.styles.sass)
+  ],
+  srcVendorOnly: [
+    path.join(folders.src, globs.styles.vendor)
+  ],
+  srcWithoutVendor: [
+    path.join(folders.src, globs.styles.css),
+    path.join(folders.src, globs.styles.sass),
+    utils.exclude(path.join(folders.src, globs.styles.vendor))
+  ],
+  dest: folders.temp, // for DEV
+  destFiles: path.join(folders.temp, globs.styles.css), // for DEV
+  destDist: path.join(folders.dist, folders.styles), // for PROD
+  finalCssBundleFilename: finalCSSBundleName,
+  finalCssBundlePath: path.join(folders.styles, finalCSSBundleName),
+  finalVendorCssBundleFilename: finalCSSVendorBundleName,
+  finalVendorCssBundlePath: path.join(folders.styles, finalCSSVendorBundleName)
+}
+
+let images = {
+  src: [
+    path.join(folders.src, globs.images)
+  ],
+  dest: path.join(folders.dist, folders.images)
+}
+
+let html = {
+  src: [
+    path.join(folders.src, globs.html)
+  ],
+  dest: folders.dist
+}
+
 export default {
-  buildLifecycle,
-  cleanLifecycle,
   extensions,
   files,
   folders,
-  globs
+  globs,
+  javascript,
+  typescript,
+  styles,
+  images,
+  html
 }
