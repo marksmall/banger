@@ -8,13 +8,20 @@ import AbstractTaskLoader from '../../abstract-task-loader'
 // import utils from '../../utils'
 
 class LogTaskLoader extends AbstractTaskLoader {
+
+  constructor (phase) {
+    super(phase)
+    this.name = 'log'
+    this.phase = phase
+  }
+
   registerTask (gulp) {
     super.registerTask(gulp)
 
-    gulp.task('log', false, () => {
+    gulp.task(this.name, false, () => {
       gutil.log(gutil.colors.green('Log task being run'))
     })
   }
 }
 
-module.exports = new LogTaskLoader()
+module.exports = new LogTaskLoader('initialize')

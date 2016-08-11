@@ -9,10 +9,17 @@ import AbstractTaskLoader from '../../abstract-task-loader'
 // import utils from '../../utils'
 
 class PackageJsonTaskLoader extends AbstractTaskLoader {
+
+  constructor (phase) {
+    super(phase)
+    this.name = 'package-json'
+    this.phase = phase
+  }
+
   registerTask (gulp) {
     super.registerTask(gulp)
 
-    gulp.task('validate-package-json', false, () => {
+    gulp.task(this.name, false, () => {
       gutil.log(gutil.colors.green('Validate package.json task being run'))
 
     //   return utils.plumbedSrc(config.files.packageJSON)
@@ -21,4 +28,4 @@ class PackageJsonTaskLoader extends AbstractTaskLoader {
   }
 }
 
-module.exports = new PackageJsonTaskLoader()
+module.exports = new PackageJsonTaskLoader('validate')

@@ -9,10 +9,17 @@ import config from '../../config'
 // import utils from '../../utils'
 
 class DeleteTaskLoader extends AbstractTaskLoader {
+
+  constructor (phase) {
+    super(phase)
+    this.name = 'delete'
+    this.phase = phase
+  }
+
   registerTask (gulp, lifecycle) {
     super.registerTask(gulp, lifecycle)
 
-    gulp.task('delete', false, () => {
+    gulp.task(this.name, false, () => {
       gutil.log(gutil.colors.green('Delete task being run'))
       del([
         config.folders.temp,
@@ -24,4 +31,4 @@ class DeleteTaskLoader extends AbstractTaskLoader {
   }
 }
 
-module.exports = new DeleteTaskLoader()
+module.exports = new DeleteTaskLoader('cleaner')

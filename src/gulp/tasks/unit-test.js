@@ -13,6 +13,13 @@ import AbstractTaskLoader from '../../abstract-task-loader'
 // import utils from '../../utils'
 
 class UnitTestTaskLoader extends AbstractTaskLoader {
+
+  constructor (phase) {
+    super(phase)
+    this.name = 'unit-test'
+    this.phase = phase
+  }
+
   registerTask (gulp) {
     super.registerTask(gulp)
 
@@ -25,8 +32,8 @@ class UnitTestTaskLoader extends AbstractTaskLoader {
     //   singleRun: true
     // }
 
-    gulp.task('unit-test', false, (callback) => {
-      gutil.log(gutil.colors.green('Lint TypeScript Code'))
+    gulp.task(this.name, false, (callback) => {
+      gutil.log(gutil.colors.green('Execute unit tests'))
     //   return utils.getKarmaServer(options, callback)
     })
 
@@ -49,4 +56,4 @@ class UnitTestTaskLoader extends AbstractTaskLoader {
   }
 }
 
-module.exports = new UnitTestTaskLoader()
+module.exports = new UnitTestTaskLoader('test')
