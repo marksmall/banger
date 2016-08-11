@@ -1,5 +1,7 @@
 # CHANGLOG
 
+* 0.0.7
+  * Moved dev dependencies to be runtime dependencies as they should have been.
 * 0.0.6
   * Added task self-based life-cycle support.
   * Added ability for users to add their own tasks to life-cycle phases.
