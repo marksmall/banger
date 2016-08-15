@@ -7,8 +7,10 @@ import utils from './utils'
  */
 export default class AbstractTaskLoader {
 
-  constructor () {
+  constructor (phase) {
     'use strict'
+
+    // this.id = phase
 
     // dangerous because of formatting issue in WebStorm (can break this code by splitting new.target in new .target)
     // issue to follow: https://youtrack.jetbrains.com/issue/WEB-18497

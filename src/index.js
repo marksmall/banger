@@ -16,14 +16,7 @@
 
 import utils from './utils'
 
-import {AbstractTaskLoader} from './abstract-task-loader'
-// // module.exports = AbstractTaskLoader
-// module.exports = {
-// // export {
-// // export default {
-//   taskLoader: AbstractTaskLoader // ,
-// //   loader
-// }
+import AbstractTaskLoader from './abstract-task-loader'
 
 /**
  * This class takes care of loading gulp tasks.
@@ -51,17 +44,9 @@ class TasksLoader {
   }
 }
 
-export default new TasksLoader()
-// let loader = new TasksLoader()
-// let taskLoader = new AbstractTaskLoader()
+let loader = new TasksLoader()
 
-export {
-// // export default {
-  AbstractTaskLoader // ,
-// //   loader
+module.exports = {
+  AbstractTaskLoader,
+  loader
 }
-
-// module.exports = {
-//   taskLoader,
-//   loader
-// }
