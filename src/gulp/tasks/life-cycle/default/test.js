@@ -24,7 +24,7 @@ class TestTaskLoader extends AbstractTaskLoader {
     super.registerTask(gulp)
     runSequence = runSequence.use(gulp)
 
-    gulp.task('test', 'Generate Test used by the project', ['compile'], () => {
+    gulp.task('test', 'Generate Test used by the project', ['compile'], (callback) => {
       gutil.log(gutil.colors.green('Generate Test used by the project'))
 
       // Get tasks associated with the Test life-cycle phase.
@@ -38,7 +38,7 @@ class TestTaskLoader extends AbstractTaskLoader {
 
       // Merge with user defined tasks
       gutil.log(gutil.colors.green('Test Phase - sub-tasks: ') + gutil.colors.blue(tasks))
-      return runSequence(tasks)
+      return runSequence(tasks, callback)
     })
   }
 }

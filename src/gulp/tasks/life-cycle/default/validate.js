@@ -26,7 +26,7 @@ class ValidateTaskLoader extends AbstractTaskLoader {
 
     runSequence = runSequence.use(gulp)
 
-    gulp.task('validate', 'Validate project files, code etc', () => {
+    gulp.task('validate', 'Validate project files, code etc', (callback) => {
       gutil.log(gutil.colors.green('Validate project files, code etc'))
 
       // Get tasks associated with the initialize life-cycle phase.
@@ -40,7 +40,7 @@ class ValidateTaskLoader extends AbstractTaskLoader {
 
       // Merge with user defined tasks
       gutil.log(gutil.colors.green('Validate Phase - sub-tasks: ') + gutil.colors.blue(tasks))
-      return runSequence(tasks)
+      return runSequence(tasks, callback)
     })
   }
 }

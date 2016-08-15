@@ -21,7 +21,7 @@ class CompileTaskLoader extends AbstractTaskLoader {
     super.registerTask(gulp)
     runSequence = runSequence.use(gulp)
 
-    gulp.task('compile', 'Compile the source', ['resources'], () => {
+    gulp.task('compile', 'Compile the source', ['resources'], (callback) => {
       gutil.log(gutil.colors.green('Compile the source'))
 
       // Get tasks associated with the Compile life-cycle phase.
@@ -35,7 +35,7 @@ class CompileTaskLoader extends AbstractTaskLoader {
 
       // Merge with user defined tasks
       gutil.log(gutil.colors.green('Compile Phase - sub-tasks: ') + gutil.colors.blue(tasks))
-      return runSequence(tasks)
+      return runSequence(tasks, callback)
     })
   }
 }

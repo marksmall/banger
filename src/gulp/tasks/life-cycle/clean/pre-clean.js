@@ -22,7 +22,7 @@ class PreCleanTaskLoader extends AbstractTaskLoader {
     super.registerTask(gulp)
     runSequence = runSequence.use(gulp)
 
-    gulp.task('pre-clean', false, () => {
+    gulp.task('pre-clean', false, (callback) => {
       gutil.log(gutil.colors.green('Pre-Clean task being run'))
 
       // Get tasks associated with the initialize life-cycle phase.
@@ -35,7 +35,7 @@ class PreCleanTaskLoader extends AbstractTaskLoader {
       }, this)
 
       gutil.log(gutil.colors.green('Pre-Clean Phase - sub-tasks: ') + gutil.colors.blue(tasks))
-      return runSequence(tasks)
+      return runSequence(tasks, callback)
     })
   }
 }

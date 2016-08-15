@@ -24,7 +24,7 @@ class ResourcesTaskLoader extends AbstractTaskLoader {
     super.registerTask(gulp)
     runSequence = runSequence.use(gulp)
 
-    gulp.task('resources', 'Generate resources used by the project', ['initialize'], () => {
+    gulp.task('resources', 'Generate resources used by the project', ['initialize'], (callback) => {
       gutil.log(gutil.colors.green('Generate resources used by the project'))
 
       // Get tasks associated with the initialize life-cycle phase.
@@ -38,7 +38,7 @@ class ResourcesTaskLoader extends AbstractTaskLoader {
 
       // Merge with user defined tasks
       gutil.log(gutil.colors.green('Resources Phase - sub-tasks: ') + gutil.colors.blue(tasks))
-      return runSequence(tasks)
+      return runSequence(tasks, callback)
     })
   }
 }

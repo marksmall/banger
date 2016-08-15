@@ -21,7 +21,7 @@ class DistributeTaskLoader extends AbstractTaskLoader {
     super.registerTask(gulp)
     runSequence = runSequence.use(gulp)
 
-    gulp.task('dist', 'Generate distributable package', ['test'], () => {
+    gulp.task('dist', 'Generate distributable package', ['test'], (callback) => {
       gutil.log(gutil.colors.green('Generate distributable package'))
 
       // Get tasks associated with the Distribute life-cycle phase.
@@ -35,7 +35,7 @@ class DistributeTaskLoader extends AbstractTaskLoader {
 
       // Merge with user defined tasks
       gutil.log(gutil.colors.green('Distribute Phase - sub-tasks: ') + gutil.colors.blue(tasks))
-      return runSequence(tasks)
+      return runSequence(tasks, callback)
     })
   }
 }

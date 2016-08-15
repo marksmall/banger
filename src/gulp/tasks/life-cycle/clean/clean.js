@@ -22,11 +22,11 @@ class CleanTaskLoader extends AbstractTaskLoader {
     super.registerTask(gulp, lifecycle)
     runSequence = runSequence.use(gulp)
 
-    gulp.task('clean', 'Delete generated files', () => {
+    gulp.task('clean', 'Delete generated files', (callback) => {
       gutil.log(gutil.colors.green('Clean task being run'))
 
       // Get tasks associated with the clean life-cycle phase.
-      return runSequence('pre-clean', 'cleaner', 'post-clean')
+      return runSequence('pre-clean', 'cleaner', 'post-clean', callback)
     })
   }
 }

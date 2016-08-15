@@ -21,7 +21,7 @@ class InitializeTaskLoader extends AbstractTaskLoader {
     super.registerTask(gulp)
     runSequence = runSequence.use(gulp)
 
-    gulp.task('initialize', 'Initialize the build', ['validate'], () => {
+    gulp.task('initialize', 'Initialize the build', ['validate'], (callback) => {
       gutil.log(gutil.colors.green('Initialize the build'))
 
       // Get tasks associated with the initialize life-cycle phase.
@@ -34,7 +34,7 @@ class InitializeTaskLoader extends AbstractTaskLoader {
 
       // Merge with user defined tasks
       gutil.log(gutil.colors.green('Initialize Phase - sub-tasks: ') + gutil.colors.blue(tasks))
-      return runSequence(tasks)
+      return runSequence(tasks, callback)
     })
   }
 }
