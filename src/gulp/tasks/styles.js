@@ -13,7 +13,7 @@ import AbstractTaskLoader from '../../abstract-task-loader'
 import config from '../../config'
 import utils from '../../utils'
 
-// let browserSync = require('browser-sync').get(config.webServerNames.dev)
+let browserSync = require('browser-sync').get(config.webServerNames.dev)
 
 class StylesTaskLoader extends AbstractTaskLoader {
 
@@ -68,10 +68,10 @@ class StylesTaskLoader extends AbstractTaskLoader {
 
       // Reload Browser if needed
       // Stream if possible
-    //   .pipe(iff(browserSync.active, browserSync.stream({
-    //     once: true,
-    //     stream: true
-    //   })))
+      .pipe(iff(browserSync.active, browserSync.stream({
+        once: true,
+        stream: true
+      })))
 
       // Task result
       .pipe(size({
