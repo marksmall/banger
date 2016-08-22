@@ -23,13 +23,13 @@ let defaultLifecycle = [{
   id: 'initialize',
   tasks: []
 }, {
-  id: 'resources',
-  tasks: []
-}, {
   id: 'compile',
   tasks: []
 }, {
   id: 'test',
+  tasks: []
+}, {
+  id: 'resources',
   tasks: []
 }, {
   id: 'dist',
