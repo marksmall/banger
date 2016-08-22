@@ -33,9 +33,9 @@ class StylesDistTaskLoader extends AbstractTaskLoader {
 
       if (gulp.options.folders) {
         src = [
-          gulp.options.folders.app + config.globs.styles.css,
-          gulp.options.folders.app + config.globs.styles.sass,
-          utils.exclude(path.join(gulp.options.folders.app, config.globs.styles.vendor))
+          gulp.options.folders.src + config.globs.styles.css,
+          gulp.options.folders.src + config.globs.styles.sass,
+          utils.exclude(path.join(gulp.options.folders.src, config.globs.styles.vendor))
         ]
       } else {
         src = config.styles.srcWithoutVendor
