@@ -259,7 +259,6 @@ let getKarmaServer = (config, callback) => {
  * @param task the task to register
  */
 let registerPhase = (loadedModule) => {
-  gutil.log(gutil.colors.green(`Registering sub-task: ${loadedModule.name} with phase: ${loadedModule.phase}`))
   defaultLifecycle.forEach(function (element) {
     if (element.id === loadedModule.phase) {
       element.tasks.push(loadedModule.name)
@@ -283,10 +282,8 @@ let registerTask = (taskDir, gulp, options) => {
   for (let key in loadedModules) {
     if (loadedModules.hasOwnProperty(key)) {
       let loadedModule = loadedModules[ key ]
-    //   console.log(`Module: ${JSON.stringify(loadedModule)}`)
 
       if (loadedModule.registerTask) {
-        console.log(`Registering module ${key}`)
         loadedModule.registerTask(gulp)
 
         if (loadedModule.phase) {

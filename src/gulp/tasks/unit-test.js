@@ -31,29 +31,11 @@ class UnitTestTaskLoader extends AbstractTaskLoader {
       path: karmaConfigFilePath,
       singleRun: true
     }
-    console.log(`TEST OPTIONS: ${JSON.stringify(options)}`)
 
     gulp.task(this.name, false, (callback) => {
       gutil.log(gutil.colors.green('Execute unit tests'))
       return utils.getKarmaServer(options, callback)
     })
-
-    // options.singleRun = false
-    // gulp.task('test-unit-watch', 'Execute all unit tests continuously (watches files)', (callback) => {
-    //   return utils.getKarmaServer(options, callback)
-    // })
-
-    // gulp.task('prepare-test-unit', 'Do all the necessary preparatory work for the test-unit task', () => {
-    //   return run([
-    //     'clean',
-    //     'ts-lint',
-    //     'check-js-style',
-    //     'check-js-quality'
-    //   ], [
-    //     'scripts-typescript',
-    //     'scripts-javascript'
-    //   ])
-    // })
   }
 }
 

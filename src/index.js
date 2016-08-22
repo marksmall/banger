@@ -40,7 +40,6 @@ class TasksLoader {
     utils.registerTask('./gulp/tasks/life-cycle/default', gulp, options)
     utils.registerTask('./gulp/tasks', gulp, options)
     utils.registerTask(options.tasks, gulp, options)
-    console.log(`INPUT OPTIONS: ${JSON.stringify(inputOptions)}, OPTIONS: ${JSON.stringify(options)}`)
   }
 }
 
