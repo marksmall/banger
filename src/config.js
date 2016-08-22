@@ -17,16 +17,14 @@ let extensions = {
   svg: '.svg'
 }
 
-let src = './src/main/app/'
-
 let folders = {
   root: './',
   dist: './dist',
   temp: './.tmp',
-  src: src,
-  styles: src + 'styles',
-  scripts: src + 'scripts',
-  images: src + 'images',
+  src: './src/main/app/',
+  styles: './styles',
+  scripts: './scripts',
+  images: './images',
   typings: './typings',
   nodeModules: './node_modules',
   jspmPackages: './jspm_packages'
@@ -68,6 +66,7 @@ let javascript = {
   destDist: path.join(folders.dist, folders.scripts, finalJsBundleName),
   finalJsBundlePath: path.join(folders.scripts, finalJsBundleName)
 }
+console.log(`Dist parts: ${folders.dist}, ${folders.scripts}, ${finalJsBundleName}`)
 
 let typescript = {
   srcAppOnly: [
@@ -115,6 +114,23 @@ let html = {
   dest: folders.dist
 }
 
+let webServerFolders = {
+  dev: [
+    // the order IS important. Folders above have precedence
+    folders.root, // necessary to have jspm_packages & jspm config file without needing a copy step
+    folders.temp, // before app so that ES5 code emitted by TypeScript/Babel takes precedence over ES2015 code that might be written in the app folder
+    folders.src
+  ],
+  dist: [
+    folders.dist
+  ]
+}
+
+let webServerNames = {
+  dev: 'MDW_DEV',
+  dist: 'MDW_DIST'
+}
+
 export default {
   extensions,
   files,
@@ -124,5 +140,7 @@ export default {
   typescript,
   styles,
   images,
-  html
+  html,
+  webServerFolders,
+  webServerNames
 }
