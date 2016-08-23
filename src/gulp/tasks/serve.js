@@ -25,7 +25,7 @@ class ServeTaskLoader extends AbstractTaskLoader {
   registerTask (gulp) {
     super.registerTask(gulp)
 
-    gulp.task(this.name, false, () => {
+    gulp.task(this.name, 'Watch files for changes and rebuild/reload automagically', ['compile'], () => {
       gutil.log(gutil.colors.green('Log task being run'))
       runSequence = runSequence.use(gulp) // needed to bind to the correct gulp object (alternative is to pass gulp to runSequence as first argument)
 
@@ -129,8 +129,6 @@ class ServeTaskLoader extends AbstractTaskLoader {
 
         gulp.watch(html).on('change', browserSync.reload) // force a reload when html changes
         gulp.watch(styles, [ 'sass-lint', 'styles' ]) // stylesheet changes will be streamed if possible or will force a reload
-        // gulp.watch(typescript, [ 'serve-scripts-typescript' ]) // TypeScript changes will force a reload
-        // gulp.watch(javascript, [ 'serve-scripts-javascript' ]) // JavaScript changes will force a reload
         gulp.watch(typescript, [ 'compile', 'reload' ]) // TypeScript changes will force a reload
         gulp.watch(javascript, [ 'compile', 'reload' ]) // JavaScript changes will force a reload
         gulp.watch(images).on('change', browserSync.reload) // force a reload when images change
@@ -146,22 +144,9 @@ class ServeTaskLoader extends AbstractTaskLoader {
         gutil.log(gutil.colors.green(`Run Proxy Task: ${gulp.options.proxy.start}`))
 
         if (gulp.options.proxy.start) {
-        //   return runSequence(['dist'], callback)
-          return runSequence(['compile', 'proxy'], callback)
+          return runSequence(['proxy'], callback)
         } else {
-          return runSequence(['dist'], callback)
-        //   return runSequence([
-        //     'clean',
-        //     'ts-lint',
-        //     'check-js-style',
-        //     'check-js-quality'
-        //   ], [
-        //     'scripts-typescript',
-        //     'scripts-javascript',
-        //     'sass-lint',
-        //     'styles',
-        //     'validate-package-json'
-        //   ])
+          return runSequence(callback)
         }
       })
     })
