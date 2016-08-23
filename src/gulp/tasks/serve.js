@@ -147,20 +147,7 @@ class ServeTaskLoader extends AbstractTaskLoader {
 
         if (gulp.options.proxy.start) {
         //   return runSequence(['dist'], callback)
-          return runSequence(['dist', 'proxy'], callback)
-        //   return runSequence([
-        //     'clean',
-        //     'ts-lint',
-        //     'check-js-style',
-        //     'check-js-quality',
-        //     'proxy'
-        //   ], [
-        //     'scripts-typescript',
-        //     'scripts-javascript',
-        //     'sass-lint',
-        //     'styles',
-        //     'validate-package-json'
-        //   ])
+          return runSequence(['compile', 'proxy'], callback)
         } else {
           return runSequence(['dist'], callback)
         //   return runSequence([
