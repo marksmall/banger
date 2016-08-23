@@ -32,7 +32,7 @@ class StylesVendorTaskLoader extends AbstractTaskLoader {
       let src = null
 
       if (gulp.options.folders) {
-        src = [ gulp.options.folders.app + '/' + config.globs.styles.vendor ]
+        src = [ gulp.options.folders.src + '/' + config.globs.styles.vendor ]
       } else {
         src = config.styles.srcVendorOnly
       }
@@ -42,7 +42,7 @@ class StylesVendorTaskLoader extends AbstractTaskLoader {
       )
 
       // Display the files in the stream
-      // .pipe(debug({title: 'Stream contents:', minimal: true}))
+    //   .pipe(debug({title: 'Stream contents:', minimal: true}))
 
       // Process Sass files
       .pipe(sass({

@@ -30,7 +30,7 @@ class ImagesTaskLoader extends AbstractTaskLoader {
       let src = null
 
       if (gulp.options.folders) {
-        src = [ gulp.options.folders.app + config.globs.images ]
+        src = [ gulp.options.folders.src + '/' + config.globs.images ]
       } else {
         src = config.images.src
       }
@@ -42,7 +42,7 @@ class ImagesTaskLoader extends AbstractTaskLoader {
       .pipe(utils.filterEmptyDirectories(eventStream))
 
       // Display the files in the stream
-      // .pipe(debug({title: 'Stream contents:', minimal: true}))
+    //   .pipe(debug({title: 'Stream contents:', minimal: true}))
 
       // Minify and cache
       .pipe(cache(imageMin({

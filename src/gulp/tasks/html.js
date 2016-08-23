@@ -54,7 +54,7 @@ class HtmlTaskLoader extends AbstractTaskLoader {
       let src = null
 
       if (gulp.options.folders) {
-        src = [ gulp.options.folders.app + config.globs.html ]
+        src = [ gulp.options.folders.src + config.globs.html ]
       } else {
         src = config.html.src
       }
@@ -64,7 +64,7 @@ class HtmlTaskLoader extends AbstractTaskLoader {
       )
 
       // Display the files in the stream
-      // .pipe(debug({title: 'Stream contents:', minimal: true}))
+    //   .pipe(debug({title: 'Stream contents:', minimal: true}))
 
       // Inject production assets path: https://www.npmjs.com/package/gulp-html-replace
       .pipe(htmlReplace({
