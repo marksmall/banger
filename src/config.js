@@ -14,7 +14,10 @@ let extensions = {
   jpg: '.jpg',
   jpeg: '.jpeg',
   gif: '.gif',
-  svg: '.svg'
+  svg: '.svg',
+  ttf: '.ttf',
+  woff: '.woff',
+  woff2: '.woff2'
 }
 
 let folders = {
@@ -27,7 +30,8 @@ let folders = {
   images: './images',
   typings: './typings',
   nodeModules: './node_modules',
-  jspmPackages: './jspm_packages'
+  jspmPackages: './jspm_packages',
+  fonts: './fonts'
 }
 
 let globs = {
@@ -43,7 +47,8 @@ let globs = {
   },
   images: path.join(folders.images, '/**/*' + '{' + extensions.png + ',' + extensions.jpg + ',' + extensions.jpeg + ',' + extensions.gif + ',' + extensions.svg + '}'),
   html: '/**/*' + extensions.html,
-  sourcemaps: '/**/*' + extensions.sourcemap
+  sourcemaps: '/**/*' + extensions.sourcemap,
+  fonts: path.join(folders.fonts, '/**/*' + '{' + extensions.ttf + ',' + extensions.woff + ',' + extensions.woff2 + ',' + extensions.svg + '}')
 }
 
 let files = {
@@ -66,7 +71,6 @@ let javascript = {
   destDist: path.join(folders.dist, folders.scripts, finalJsBundleName),
   finalJsBundlePath: path.join(folders.scripts, finalJsBundleName)
 }
-console.log(`Dist parts: ${folders.dist}, ${folders.scripts}, ${finalJsBundleName}`)
 
 let typescript = {
   srcAppOnly: [
@@ -114,6 +118,13 @@ let html = {
   dest: folders.dist
 }
 
+let fonts = {
+  src: [
+    path.join(folders.src, globs.fonts)
+  ],
+  dest: path.join(folders.dist, folders.fonts)
+}
+
 let webServerFolders = {
   dev: [
     // the order IS important. Folders above have precedence
@@ -142,5 +153,6 @@ export default {
   images,
   html,
   webServerFolders,
-  webServerNames
+  webServerNames,
+  fonts
 }
