@@ -45,19 +45,15 @@ class ServeTaskLoader extends AbstractTaskLoader {
           next()
         }
       ]
-      gutil.log(gutil.colors.red(`middleware: ${JSON.stringify(middleware)}`))
 
       if (gulp.options.proxy) {
         proxy = proxyMiddleware(gulp.options.proxy.api, {
           target: gulp.options.proxy.target + ':' + gulp.options.proxy.port,
           changeOrigin: true   // for vhosted sites, changes host header to match to target's host
         })
-        gutil.log(gutil.colors.red(`proxy: ${JSON.stringify(proxy)}`))
 
         middleware.unshift(proxy)
-        gutil.log(gutil.colors.red(`middleware: ${JSON.stringify(middleware)}`))
       }
-      gutil.log(gutil.colors.red(`middleware: ${JSON.stringify(middleware)}`))
 
       // If the app src folder is overridden, then append it to the watch list, otherwise use default.
       let baseDir = null
@@ -67,7 +63,6 @@ class ServeTaskLoader extends AbstractTaskLoader {
       } else {
         baseDir = config.webServerFolders.dev
       }
-      gutil.log(gutil.colors.red(`baseDir: ${baseDir}`))
 
       let browserSyncOptions = { // http://www.browsersync.io/docs/options/
         notify: false,
@@ -114,17 +109,8 @@ class ServeTaskLoader extends AbstractTaskLoader {
         javascript = config.javascript.src
         images = config.images.src
       }
-      gutil.log(gutil.colors.red(`Html: ${html}`))
-      gutil.log(gutil.colors.red(`styles: ${styles}`))
-      gutil.log(gutil.colors.red(`typescript: ${typescript}`))
-      gutil.log(gutil.colors.red(`javascript: ${javascript}`))
-      gutil.log(gutil.colors.red(`images: ${images}`))
-      gutil.log(gutil.colors.red(`BrowserSync: ${JSON.stringify(gulp.options.browserSync)}`))
-      gutil.log(gutil.colors.red(`BrowserSyncOptions: ${JSON.stringify(browserSyncOptions)}`))
 
       let startBrowserSync = () => {
-        let opts = utils.mergeOptions(browserSyncOptions, gulp.options.browserSync)
-        gutil.log(gutil.colors.red(`BrowserSyncOptions 2: ${JSON.stringify(opts)}`))
         browserSync.init(utils.mergeOptions(browserSyncOptions, gulp.options.browserSync))
 
         gulp.watch(html).on('change', browserSync.reload) // force a reload when html changes
@@ -134,21 +120,11 @@ class ServeTaskLoader extends AbstractTaskLoader {
         gulp.watch(images).on('change', browserSync.reload) // force a reload when images change
       }
 
-      gulp.task('serve', 'Watch files for changes and rebuild/reload automagically', () => {
-        return runSequence('prepare-serve', startBrowserSync) // here we need to ensure that all the other tasks are done before we start BrowserSync
-      })
+      startBrowserSync()
 
-      gulp.task('prepare-serve', 'Do all the necessary preparatory work for the serve task', (callback) => {
-        // Only run the proxy task if there is configuration for it, the proxy task is mandatory if
-        // the proxy configuration is present.
-        gutil.log(gutil.colors.green(`Run Proxy Task: ${gulp.options.proxy.start}`))
-
-        if (gulp.options.proxy.start) {
-          return runSequence(['proxy'], callback)
-        } else {
-          return runSequence(callback)
-        }
-      })
+      if (gulp.options.proxy.start) {
+        return runSequence(['proxy'])
+      }
     })
   }
 }

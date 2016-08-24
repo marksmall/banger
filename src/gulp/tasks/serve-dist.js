@@ -25,10 +25,10 @@ class ServeDistTaskLoader extends AbstractTaskLoader {
   registerTask (gulp) {
     super.registerTask(gulp)
 
-    gulp.task(this.name, 'Build and serve the production version (i.e., "dist" folder contents', () => {
+    gulp.task(this.name, 'Build and serve the production version i.e. "dist" folder contents', ['dist'], () => {
       gutil.log(gutil.colors.green('Log task being run'))
 
-      let run = runSequence.use(gulp) // needed to bind to the correct gulp object (alternative is to pass gulp to runSequence as first argument)
+      runSequence = runSequence.use(gulp) // needed to bind to the correct gulp object (alternative is to pass gulp to runSequence as first argument)
 
       // configure proxy middleware
       // context: '/' will proxy all requests
@@ -76,15 +76,11 @@ class ServeDistTaskLoader extends AbstractTaskLoader {
         })
       }
 
-      gulp.task('serve-dist', 'Build and serve the production version (i.e., "dist" folder contents', () => {
-        let tasks = [ 'dist' ]
+      startBrowserSync() // here we need to ensure that all the other tasks are done before we start BrowserSync
 
-        if (gulp.options.proxy.start) {
-          tasks.unshift('proxy')
-        }
-
-        return run(tasks, startBrowserSync) // here we need to ensure that all the other tasks are done before we start BrowserSync
-      })
+      if (gulp.options.proxy.start) {
+        return runSequence(['proxy'])
+      }
     })
   }
 }
