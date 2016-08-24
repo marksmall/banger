@@ -9,7 +9,8 @@
     "setup": "npm install --no-optional",
     "build": "gulp",
     "test": "gulp test",
-    "start": "gulp watch"
+    "start": "gulp watch",
+      "release": "gulp release"  
   },
   "engines": {
     "node": ">=4.5.0",
