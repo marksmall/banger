@@ -1,5 +1,5 @@
 <a name="0.0.9"></a>
-## [0.0.9](https://github.com/marksmall/banger/compare/0.0.7...0.0.9) (2016-08-24)
+## [0.0.9](https://github.com/marksmall/banger/compare/0.0.8...0.0.9) (2016-08-24)
 
 
 
