@@ -90,6 +90,7 @@
     "karma-ie-launcher": "0.2.0",
     "karma-jspm": "2.1.x",
     "karma-phantomjs-launcher": "1.0.x",
+    "karma-spec-reporter": "0.0.26",
     "karma-systemjs": "0.13.x",
     "path": "^0.12.7",
     "phantomjs-polyfill": "0.0.x",
@@ -102,6 +103,12 @@
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
+    "conventional-github-releaser": "^1.1.3",
+    "gulp-bump": "^2.4.0",
+    "gulp-conventional-changelog": "^1.1.0",
+    "gulp-git": "^1.11.1",
+    "http-proxy-middleware": "^0.17.1",
+    "imagemin-gifsicle": "^5.1.0",
     "jasmine": "2.4.x",
     "karma-jasmine": "0.3.x",
     "run-sequence": "^1.2.2"
