@@ -81,4 +81,4 @@ class StylesTaskLoader extends AbstractTaskLoader {
   }
 }
 
-module.exports = new StylesTaskLoader('resources')
+module.exports = new StylesTaskLoader('compile')
