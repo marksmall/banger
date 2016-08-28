@@ -21,7 +21,7 @@ help(gulp)
 
 let runSequence = require('run-sequence')
 
-gulp.task('changelog', 'Generate a CHANGELOG', () => {
+gulp.task('changelog', 'Generate a CHANGELOG', ['dist'], () => {
   return gulp.src('CHANGELOG.md', {
     buffer: false
   })
