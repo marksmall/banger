@@ -16,15 +16,15 @@ requireDir('./gulp/tasks', {
 })
 
 // Default task
-gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) => {
+gulp.task('default', 'Build production files', ['clean'], (callback) => {
   return runSequence('validate-package-json', [
-    'scripts-javascript-dist'
+    'dist'
   ], callback)
 })
 
-gulp.task('prepare-default', 'Do all the necessary preparatory work for the default task', (callback) => {
-  return runSequence('clean', 'check-js-quality', callback)
-})
+// gulp.task('prepare-default', 'Do all the necessary preparatory work for the default task', (callback) => {
+//   return runSequence('clean', 'check-js-quality', callback)
+// })
 
 // gulp.task('phase', 'Run phase of default life-cycle', () => {
 //   // Get phase of life-cycle to run

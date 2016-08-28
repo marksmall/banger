@@ -15,7 +15,7 @@ import utils from '../utils'
 // The help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
 help(gulp)
 
-gulp.task('scripts-javascript-dist', 'Transpile JavaScript (ES2015 to ES5 using Babel)', () => {
+gulp.task('dist', 'Transpile JavaScript (ES2015 to ES5 using Babel)', ['js-lint'], () => {
   return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
     config.javascript.src
   )
@@ -38,6 +38,6 @@ gulp.task('scripts-javascript-dist', 'Transpile JavaScript (ES2015 to ES5 using 
 
   // Task result
   .pipe(size({
-    title: 'scripts-javascript'
+    title: 'dist'
   }))
 })

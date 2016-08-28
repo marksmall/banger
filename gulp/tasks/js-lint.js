@@ -12,7 +12,7 @@ import utils from '../utils'
 // The help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
 help(gulp)
 
-gulp.task('check-js-quality', 'Check JavaScript code quality using JSHint', () => {
+gulp.task('js-lint', 'Check JavaScript code quality using JSHint', () => {
   return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
     config.javascript.srcPkg
   )

@@ -21,7 +21,7 @@ help(gulp)
 
 let runSequence = require('run-sequence')
 
-gulp.task('changelog', 'Generate a CHANGELOG', ['dist'], () => {
+gulp.task('changelog', 'Generate a CHANGELOG', () => {
   return gulp.src('CHANGELOG.md', {
     buffer: false
   })
@@ -77,11 +77,11 @@ gulp.task('create-new-tag', 'Tag a new release', (callback) => {
 
 let spawn = require('child_process').spawn
 
-gulp.task('npm-publish', (callback) => {
+gulp.task('npm-publish', 'Publish package to NPM repository', (callback) => {
   spawn('npm', ['publish'], { stdio: 'inherit' }).on('close', callback)
 })
 
-gulp.task('release', 'Generate a new release of project', (callback) => {
+gulp.task('release', 'Generate a new release of project', ['dist'], (callback) => {
   runSequence(
     'bump-version',
     'changelog',
