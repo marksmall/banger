@@ -8,16 +8,13 @@ This project uses [Gulp](http://gulpjs.com/) to build NodeJS based apps.
 
 ## Purpose
 
-The basic tenet of this project is to provide a life-cycle base build system
-to automate NodeJS application(s). The life-cycle provide points we can
-attach tasks to. This provides the ability to provide an extensible base of
-tasks to build any application.
+The basic tenet of this project is to provide a life-cycle base build system to automate NodeJS
+application(s). The life-cycle provides extensible points tasks can be attached to.
 
 ## Life-cycle
 
-Each life-cycle is made up of phases, each depending on the previous in the chain to
-have executed. You attach tasks to a phase for it to be run. Each task associated with
-a phase is run in parallel.
+Each life-cycle is made up of phases, each depending on the previous in the chain to have executed.
+You attach tasks to a phase for it to be run. Each task associated with a phase is run in parallel.
 
 **IMPORTANT:** A task must have no dependency other than the phase.
 
@@ -35,10 +32,9 @@ There are in fact multiple life-cycles, **Clean** and **Default**.
 | ----------------------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | validate                | validate the project is correct and all necessary information is available.                                                                                                   |
 | initialize              | initialize build state, e.g. set properties or create directories.                                                                                                            |
-| resources               | generate resources for inclusion in the package.                                                                                                                              |
 | compile                 | compile the source code of the project.                                                                                                                                       |
-| test-compile            | compile the test source code into the test destination directory                                                                                                              |
 | test                    | run tests using a suitable unit testing framework. These tests should not require the code be packaged or deployed.                                                           |
+| resources               | generate resources for inclusion in the package.                                                                                                                              |
 | dist                    | take the compiled code and package it in its distributable format, such as a JAR.                                                                                             |
 
 ### Validate
@@ -50,20 +46,10 @@ The validate phase is where we check files:
 
 ### Initialize
 
-Create directories and any other necessary project structure before project can be built.
-
-### Resources
-
-Generate resources used by the project:
-
-* image sprites
-* source-maps
+Empty for now but could be used to create directories and necessary project structure before project
+can be built.
 
 ### Compile
-
-Compile the code (if necessary), for instance, if you are using TypeScript.
-
-### Compile Tests
 
 Compile the code (if necessary), for instance, if you are using TypeScript.
 
@@ -71,55 +57,38 @@ Compile the code (if necessary), for instance, if you are using TypeScript.
 
 Run Unit Tests
 
+### Resources
+
+Copy resources used by the project:
+
+* image sprites
+* source-maps
+* HTML fragments
+* fonts
+* ...
+
 ### Create Distribution
 
-Generate the distribution.
+Generate the distributable application.
 
+## Stand-alone Tasks
 
-### Old Task Order
+These are tasks to aid development:
 
-default:
-  validate-package-json
-  parallel:
-    clean
-    ts-lint
-    check-js-style
-    check-js-quality
-  parallel:
-    scripts-TypeScript
-    scripts-JavaScript
-  copy:
-  parallel:
-    styles-vendor-dist
-    styles-dist
-    scripts-JavaScript-dist
-    html
-    images
+* serve
+* serve-dist
 
-### New task Order
+### Serve Development Code
 
-clean
+`gulp serve` will create a development server displaying the application, it can
+run a **proxy** server that acts as a stub for any back-end api service. It watches
+files so as to re-load the application on change. It uses
+[browser-sync](https://www.browsersync.io/) to update any browser with the app loaded.
 
-default:
-  validate:
-    package-json
-    ts-lint
-    js-lint
-    sass-lint
-  initialize:
-    log
-  resources:
-    html
-    images
-  compile:
-    ts-compile
-    js-compile
-  test:
-    unit-test
-  dist:
-    styles-vendor
-    styles-app
-    js
+### Serve Distributable
+
+`gulp serve-dist` also creates a development server, this time using the distributable
+code.
 
 ## Release Process
 
