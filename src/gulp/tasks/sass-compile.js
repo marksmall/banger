@@ -13,13 +13,13 @@ import AbstractTaskLoader from '../../abstract-task-loader'
 import config from '../../config'
 import utils from '../../utils'
 
-let browserSync = require('browser-sync').get(config.webServerNames.dev)
+let browserSync = require('browser-sync').create(config.webServerNames.dev)
 
-class StylesTaskLoader extends AbstractTaskLoader {
+class SassCompileTaskLoader extends AbstractTaskLoader {
 
   constructor (phase) {
     super(phase)
-    this.name = 'styles'
+    this.name = 'sass-compile'
     this.phase = phase
   }
 
@@ -75,10 +75,10 @@ class StylesTaskLoader extends AbstractTaskLoader {
 
       // Task result
       .pipe(size({
-        title: 'styles'
+        title: 'Compiled CSS'
       }))
     })
   }
 }
 
-module.exports = new StylesTaskLoader('compile')
+module.exports = new SassCompileTaskLoader('compile')
