@@ -86,6 +86,7 @@
     "imagemin-gifsicle": "^5.1.0",
     "imagemin-jpegtran": "^5.0.2",
     "imagemin-optipng": "^5.2.0",
+    "imagemin-svgo": "^5.2.0",
     "jspm": "^0.16.42",
     "karma": "0.13.x",
     "karma-chrome-launcher": "0.2.x",
