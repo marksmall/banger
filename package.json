@@ -84,6 +84,8 @@
     "gulp-util": "^3.0.7",
     "http-proxy-middleware": "^0.17.1",
     "imagemin-gifsicle": "^5.1.0",
+    "imagemin-jpegtran": "^5.0.2",
+    "imagemin-optipng": "^5.2.0",
     "jspm": "^0.16.42",
     "karma": "0.13.x",
     "karma-chrome-launcher": "0.2.x",
@@ -109,7 +111,6 @@
     "gulp-conventional-changelog": "^1.1.0",
     "gulp-git": "^1.11.1",
     "http-proxy-middleware": "^0.17.1",
-    "imagemin-gifsicle": "^5.1.0",
     "jasmine": "2.4.x",
     "karma-jasmine": "0.3.x",
     "run-sequence": "^1.2.2"
