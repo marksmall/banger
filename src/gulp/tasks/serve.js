@@ -11,6 +11,7 @@ import config from '../../config'
 import utils from '../../utils'
 
 let browserSync = require('browser-sync').create(config.webServerNames.dev)
+
 let proxyMiddleware = require('http-proxy-middleware')
 let runSequence = require('run-sequence')
 
@@ -113,11 +114,11 @@ class ServeTaskLoader extends AbstractTaskLoader {
       let startBrowserSync = () => {
         browserSync.init(utils.mergeOptions(browserSyncOptions, gulp.options.browserSync))
 
-        gulp.watch(html).on('change', browserSync.reload) // force a reload when html changes
-        gulp.watch(styles, [ 'sass-lint', 'styles' ]) // stylesheet changes will be streamed if possible or will force a reload
-        gulp.watch(typescript, [ 'compile', 'reload' ]) // TypeScript changes will force a reload
-        gulp.watch(javascript, [ 'compile', 'reload' ]) // JavaScript changes will force a reload
-        gulp.watch(images).on('change', browserSync.reload) // force a reload when images change
+        gulp.watch(html, ['reload']) // force a reload when html changes
+        gulp.watch(styles, [ 'sass-lint', 'sass-compile' ]) // stylesheet changes will be streamed if possible or will force a reload
+        gulp.watch(typescript, [ 'ts-lint', 'ts-compile', 'reload' ]) // TypeScript changes will force a reload
+        gulp.watch(javascript, [ 'js-lint', 'js-compile', 'reload' ]) // JavaScript changes will force a reload
+        gulp.watch(images, ['reload']) // force a reload when images change
       }
 
       startBrowserSync()
